@@ -1,0 +1,121 @@
+<div class="custom-container mt-md-4 p-4 mb-5">
+  <% if @saved.blank? %>
+    <h4 class="mt-md-5">You haven't saved any users to your favourites yet. Have a browse, and start adding!</h4>
+  <% else %>
+  <ul class="nav nav-tabs w-auto h-auto" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Favourites</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Mutual Faves</a>
+    </li>
+  </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <% @saved.each do |user| %>
+
+          <div class="card mb-3 mt-3">
+            <div class="card-body p-3">
+
+              <div class="row">
+
+                <div class="col-9 p-0 pl-3">
+                  <div class="row m-auto">
+                    <div class="circle search ml-2">
+                      <%= link_to user_path(user.id) do %>
+                        <%= image_tag user.picture if user.picture.attached? %>
+                      <% end %>
+                    </div>
+                    <div class="pl-3 my-auto">
+                      <div class="row m-auto">  
+                        <%= link_to user_path(user.id) do %><%= user.first_name %> <%= user.last_name %><% end %>
+                      </div>
+                      <div class="row m-auto">
+                        <%= user.role %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row p-0 m-auto">
+                    <% user.skills.each do |skill| %>
+                      <div class="card w-auto p-1 pl-2 pr-2 m-1 text-muted small btn-default-sm">
+                        <%= skill.name %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+
+                <div class="col-3 d-flex flex-column justify-content-between pl-0">
+                  <div class="row m-0 ml-auto">
+                    <% if current_user.followers.where(id: user.id).exists? %>
+                      <%= link_to icon("fas", "star"), follow_path(id: user.id), method: :delete %>
+                    <%else%>
+                      <%= link_to icon("far", "star"), follows_path(id: user.id), method: :post %>
+                    <%end%>
+                  </div>
+                  <div class="row m-0 text-right ml-auto">
+                    <%= button_to "Message", conversations_path(sender_id: current_user.id, receiver_id: user.id), method: :post, class: "btn btn-primary small" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <% if @mutuals.blank? %>
+          <h4 class="mt-5">Mutual faves lets you see the people who have favourited you back</h4>
+        <% else %>
+          <% @mutuals.each do |user| %>
+
+            <div class="card mb-3 mt-3">
+              <div class="card-body p-3">
+
+                <div class="row">
+
+                  <div class="col-9 p-0 pl-3">
+                    <div class="row m-auto">
+                      <div class="circle search ml-2">
+                        <%= link_to user_path(user.id) do %>
+                          <%= image_tag user.picture if user.picture.attached? %>
+                        <% end %>
+                      </div>
+                      <div class="pl-3 my-auto">
+                        <div class="row m-auto">  
+                          <%= link_to user_path(user.id) do %><%= user.first_name %> <%= user.last_name %><% end %>
+                        </div>
+                        <div class="row m-auto">
+                          <%= user.role %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row p-0 m-auto">
+                      <% user.skills.each do |skill| %>
+                        <div class="card w-auto p-1 pl-2 pr-2 m-1 text-muted small btn-default-sm">
+                          <%= skill.name %>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+
+                  <div class="col-3 d-flex flex-column justify-content-between pl-0">
+                    <div class="row m-0 ml-auto">
+                      <% if current_user.followers.where(id: user.id).exists? %>
+                        <%= link_to icon("fas", "star"), follow_path(id: user.id), method: :delete %>
+                      <%else%>
+                        <%= link_to icon("far", "star"), follows_path(id: user.id), method: :post %>
+                      <%end%>
+                    </div>
+                    <div class="row m-0 text-right ml-auto">
+                      <%= button_to "Message", conversations_path(sender_id: current_user.id, receiver_id: user.id), method: :post, class: "btn btn-primary small" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>   
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,54 @@
+<div class="custom-container m-auto p-3 pt-5">
+  <div class="row">
+    <div class="mb-2 col-md-4 profile">
+      <div class="circle">
+        <% if @user.picture.attached? %>
+          <%= image_tag @user.picture %>
+        <% else %>
+           <%= image_tag "default.png" %>
+        <% end %>
+      </div>
+      <p>
+        <span class="font-weight-bold"><%= @user.first_name %> <%= @user.last_name %></span> <%= "/ #{@user.age}" unless @user.age.blank? %><br>
+        <%= @user.role %><br>
+        <%= @user.occupation %><br>
+        <%= @location.name %>
+      </p>
+      <div class="row">
+        <div class="col-1">
+          <% if current_user.followers.where(id: @user.id).exists? %>
+            <%= link_to icon("fas", "star"), follow_path(id: @user.id), method: :delete %>
+          <%else%>
+            <%= link_to icon("far", "star"), follows_path(id: @user.id), method: :post %>
+          <%end%>
+        </div>
+        <div class="col-1">
+          <%= link_to icon("far", "comment"), conversations_path(sender_id: current_user.id, receiver_id: @user.id), method: :post %>
+        </div>
+        <div class="col-1">
+          <%= link_to icon("fas", "globe"), @user.portfolio_url, target: "_blank" %>
+        </div>
+      </div>
+      <div class="m-auto">
+        <% if @user.id == current_user.id %>
+          <%= button_to("Edit", edit_user_path(@user), {method: :get, class: "mt-3 btn btn-outline-primary small"})%>
+        <% end %>
+      </div>
+
+    </div>
+    <div class="profile mb-5 mt-md-5 col-md-8 pt-2">
+        <strong>About Me</strong>
+        <p>
+          <%= @user.bio %>
+        </p>
+      
+      <div class="card-columns row p-2">
+        <% @user.skills.each do |skill| %>
+          <div class="card w-auto p-2 pl-3 pr-3 m-1 small btn-default-sm">
+            <%= skill.name %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

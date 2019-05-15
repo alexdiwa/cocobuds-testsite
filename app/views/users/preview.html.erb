@@ -1,0 +1,27 @@
+
+<div class="custom-container landing p-5">
+    <div class="m-auto">
+        <h5 class="mb-5 mt-md-5 display-4 text-center">
+            <% if @users.length == 0 %>
+                Sorry, there are no <%= @role_name %>s in <%= @location_name %> who know <%= @skill_name %>.
+            <% elsif @users.length == 1%>
+                There is 1 <%= @role_name %> in <%= @location_name %> who knows <%= @skill_name %>.
+            <% elsif @users.length > 1%>
+                There are <%= @users.length %> <%= @role_name %>s in <%= @location_name%> who know <%= @skill_name %>.
+            <% end %>
+        </h5>
+    </div>
+    <div class="text-center">
+        <% if @users.length == 0 %>
+            <%= button_to("Try again?", "/#search", {method: :get, class: "mb-3 btn btn-primary btn-default btn-lg"})%>
+            <div class="text-center mb-5">
+                <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "Login", new_user_session_path %>
+            </div>
+        <% else %>
+            <%= button_to("Sign up to meet them!", new_user_registration_path, {method: :get, class: "mb-3 btn btn-primary"})%>
+            <div class="text-center mb-5">
+                Already signed up? <%= link_to "Login", new_user_session_path %>
+            </div>
+        <% end %>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="custom-container m-auto p-4 pt-5 mt-5 mb-4">
+        <h5 class="mb-5">
+            This is a conversation between you and <%= link_to user_path(@user.id) do %><%= @user.first_name %><% end %>. Don't be afraid to say 'hi' first--someone's gotta break the ice!
+        </h5>
+        <div>
+        <% @messages.each do |message| %>
+            <% if message.body %>
+                <% if current_user.id == message.user_id %>
+                    <div class="card p-3 text-right mb-3 w-75 ml-auto msg-border">
+                        <div class="card-body row align-items-center pt-1 pb-0">
+                            <div class="col-md-10 text-muted p-0">
+                                <span>
+                                <%= link_to user_path(message.user_id) do %><%= message.user.first_name %> <%= message.user.last_name %><% end %>
+                                </span><br>
+                                <span><%= message.msg_time %></span>
+                            </div>
+                            <div class="col-md-2 p-0">
+                                <div class="circle msg filtered">
+                                    <%= image_tag message.user.picture if message.user.picture.attached? %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card-body col-md-12 pb-1 pt-1">
+                                <span><%= message.body %></span>
+                            </div>
+                        </div>
+                    </div>
+                <% else %>
+                    <div class="card p-3 mb-3 w-75 mr-auto">
+                        <div class="card-body row align-items-center pt-1 pb-0">
+                            <div class="col-md-2 p-0">
+                                <div class="circle msg filtered">
+                                    <%= image_tag message.user.picture if message.user.picture.attached? %>
+                                </div>
+                            </div>
+                            <div class="col-md-10 text-muted p-0">
+                                <span>
+                                <%= link_to user_path(message.user_id) do %><%= message.user.first_name %> <%= message.user.last_name %><% end %>
+                                </span><br>
+                                <span><%= message.msg_time %></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card-body col-md-12 pb-1 pt-1">
+                                <span><%= message.body %></span>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            <% end %>
+        <% end %>
+        </div>
+        <div>
+        <%= form_for [@conversation, @message] do |f| %>
+            <div class="form-group">
+                <%= f.label :bio, "Write a nice message", class: "sr-only" %>
+                <%= f.text_area :body, autofocus: true, placeholder: "Say something nice!", class: "form-control", rows: 5, resize: false, required: true %>
+            </div>
+            <div class="mb-3 form-group text-center">
+                <%= f.submit "Send", class: "btn btn-primary btn-block" %>
+            </div>
+        <% end %>
+        </div>
+</div>

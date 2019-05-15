@@ -1,0 +1,56 @@
+<% if @users.blank? %>
+  <div class="w-100 p-4">
+    <h4>Sorry, we couldn't find anyone that matches your search. Try again!</h4>
+  </div>
+<% else %>
+  <div class="w-100">
+    <% @users.each do |user| %>
+      <div class="card mb-3">
+        <div class="card-body p-3">
+
+          <div class="row">
+
+            <div class="col-9 p-0 pl-3">
+              <div class="row m-auto">
+                <div class="circle search ml-2">
+                  <%= link_to user_path(user.id) do %>
+                    <%= image_tag user.picture if user.picture.attached? %>
+                  <% end %>
+                </div>
+                <div class="pl-3 my-auto">
+                  <div class="row m-auto">  
+                    <%= link_to user_path(user.id) do %><%= user.first_name %> <%= user.last_name %><% end %>
+                  </div>
+                  <div class="row m-auto">
+                    <%= user.role %>
+                  </div>
+                </div>
+              </div>
+              <div class="row p-0 m-auto">
+                <% user.skills.each do |skill| %>
+                  <div class="card w-auto p-1 pl-2 pr-2 m-1 text-muted small btn-default-sm">
+                    <%= skill.name %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="col-3 d-flex flex-column justify-content-between pl-0">
+              <div class="row m-0 ml-auto">
+                <% if current_user.followers.where(id: user.id).exists? %>
+                  <%= link_to icon("fas", "star"), follow_path(id: user.id), method: :delete %>
+                <%else%>
+                  <%= link_to icon("far", "star"), follows_path(id: user.id), method: :post %>
+                <%end%>
+              </div>
+              <div class="row m-0 text-right ml-auto">
+                <%= button_to "Message", conversations_path(sender_id: current_user.id, receiver_id: user.id), method: :post, class: "btn btn-primary small" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= paginate @users %>
+<% end %>

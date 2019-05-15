@@ -1,0 +1,38 @@
+<div class="p-4 yellow bg-y">
+  <div class="mt-md-5 pt-5 custom-container">
+        <h1 class="mb-4">Donations Support Cocobuds</h1>  
+          <p class="donate-text">
+          Cocobuds is run independently. To keep this service running, we rely on the kindness of our friends and community.
+          </p>
+          <p class="donate-text">
+          We started Cocobuds as an assignment for our coding bootcamp. We invest our personal time in building Cocobuds because we love and believe in this project, and value our talented network of designers and developers. Your support makes this possible.
+          </p>
+          <p class="donate-text">
+            Thank you so much,<br />
+            Antonella, Michael & Alex <br />
+            CB
+          </p>
+    <button id="stripePayment" class="btn btn-primary mt-3">Donate $1</button>
+    <div class="row pb-5 pt-5"> 
+      <div class="col-sm-12 m-auto">
+        <%= image_tag "img3.jpg", class:"img-fluid" %>
+      </div>
+    </div>
+  </div> 
+</div>
+<script>
+  document.getElementById("stripePayment").addEventListener("click", function() {
+
+      var stripe = Stripe('<%= Rails.application.credentials.dig(:stripe, :public) %>');
+
+      stripe.redirectToCheckout({
+        sessionId: '<%= @stripe_session_id %>',
+      }).then(function (result) {
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer
+        // using `result.error.message`.
+      });
+
+  });
+</script>
+

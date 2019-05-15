@@ -1,0 +1,43 @@
+<div class="custom-container mt-md-4 p-3 pt-4 mb-5">
+<div class="row pt-0 justify-content-between">
+<div class="col-md-7 pr-3 pl-3">
+    <% if @show_empty %>
+            <h4 class="mt-md-5">You have no messages. Get connecting!</h4>
+    <% else %>
+
+                <h5 class="mb-2">Inbox</h5>
+                <% @conversations.each_with_index do |conversation, i| %>
+                    <% next if conversation.messages.blank? %>
+                    <%= link_to conversation_messages_path(conversation) do %>
+                        <div class="card mb-1 border-0">
+                            <div class="card-body row align-items-center p-2 <%= "bottom-bord" unless i == @conversations.length - 1 %>">
+                                <div class="col-2 fixed-width-pic p-0">
+                                    <div class="circle msg filtered">
+                                        <%= image_tag conversation.recipient(current_user).picture if conversation.recipient(current_user).picture.attached? %>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <span><%= conversation.recipient(current_user).first_name %> <%= conversation.recipient(current_user).last_name %></span><br>
+                                    <span class="small"><%= conversation.messages.last.inbox_time %></span>
+                                </div>
+                                <div class="col-2 m-auto">
+                                    <% if !conversation.unread_message_count(current_user).zero? %>
+                                        <div class="p-1 text-center m-0 small btn-default-sm notification ml-auto">
+                                            <%= conversation.unread_message_count(current_user) %>
+                                        </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                <% end %>
+
+
+
+    <% end %>
+    </div>
+    <div class="col-md-4 mt-5 pl-3">
+        <%= image_tag "message.svg", class:"img-fluid mt-5" %>
+    </div>
+    </div> 
+</div>

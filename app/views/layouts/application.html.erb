@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cocobuds</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= favicon_link_tag asset_path('y_favicon.png') %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://js.stripe.com/v3/"></script>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top">
+      <a href="<%= root_path %>"><%= image_tag "cocobuds_logo-01.svg", class: "navbar-brand ml-3" %></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+              <li class="nav-item my-auto">
+                <%= link_to "Search", users_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item my-auto">
+                <%= link_to "Favourites", saved_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item my-auto">
+                <%= link_to conversations_path, class: "nav-link" do %>Messages<span class="ml-1 p-1 pl-2 pr-2 small btn-default-sm notification <%= "d-none" if @total_unread == 0 %>"><%= @total_unread %></span><% end %>
+              </li> 
+              <li class="nav-item my-auto">
+                <%= link_to "Donate", "/pages/donate", class: "nav-link" %>
+              </li>
+              <li class="nav-item dropdown my-auto">
+                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="circle nav m-0 p-0 mt-1" aria-labelledby="navbarDropdown">
+                    <% if current_user.picture.attached? %>
+                      <%= image_tag current_user.picture %>
+                    <% else %>
+                      <%= image_tag "default.png" %>
+                    <% end %>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  <%= link_to "My Profile", user_path(current_user.id), class: "dropdown-item small" %>
+                  <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item small"%>
+                  <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "dropdown-item small" ) %>    
+                </div>
+              </li>              
+            <% else %>
+              <li class="nav-item">
+                <%= link_to('Sign up', new_user_registration_path, class: "nav-link")  %> 
+              </li>
+              <li class="nav-item"> 
+                <%= link_to('Log in', new_user_session_path, class: "nav-link")  %>  
+              </li>
+            <% end %>
+        </ul>
+      </div>
+    </nav>
+    <div class="master-container mt-3 pt-5">
+      <div class="alerts">
+        <% if notice %>
+          <div class="alert alert-success">
+            <button type="button" class="close pl-3" data-dismiss="alert">&times;</button>
+            <%= notice %>
+          </div>
+        <% elsif alert %>
+          <div class="alert alert-danger">
+            <button type="button" class="close pl-3" data-dismiss="alert">&times;</button>
+            <%= alert %>
+          </div>
+        <% end %>
+      </div>
+      <%= yield %>
+    </div>
+  </body>
+
+  <footer id="myFooter">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-3">
+                  <h5>Get started</h5>
+                  <ul>
+                      <li><a href="#">Home</a></li>
+                      <li><a href="#">Sign up</a></li>
+                      <li><a href="#">Downloads</a></li>
+                  </ul>
+              </div>
+              <div class="col-md-3">
+                  <h5>About us</h5>
+                  <ul>
+                      <li><a href="#">Company Information</a></li>
+                      <li><a href="#">Contact us</a></li>
+                      <li><a href="#">Reviews</a></li>
+                  </ul>
+              </div>
+              <div class="col-md-3">
+                  <h5>Support</h5>
+                  <ul>
+                      <li><a href="#">FAQ</a></li>
+                      <li><a href="#">Help desk</a></li>
+                      <li><a href="#">Forums</a></li>
+                  </ul>
+              </div>
+              <div class="col-md-3">
+                  <div class="social-networks">
+                        <a href="#"><%= icon("fab", "twitter") %></a>
+                        <a href="#"><%= icon("fab", "facebook") %></a>
+                  </div>
+                  <button type="button" class="btn btn-outline-primary">Contact us</button>
+              </div>
+          </div>
+      </div>
+      <div class="footer-copyright small mb-5">
+          &copy; AMA 2019
+      </div>
+  </footer>
+
+
+</html>

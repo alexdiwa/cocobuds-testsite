@@ -1,0 +1,349 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+ @import "bootstrap";
+ @import "font-awesome-sprockets";
+ @import "font-awesome";
+ @import "footer";
+ @import url("https://use.typekit.net/udf3jvw.css");
+ @font-face {
+  font-family: 'hellovetica';
+  src: url('hellovetica.ttf')  format('truetype'), 
+}
+
+ $blue: #233EF8;
+ $black: #000000;
+ $yellow: #fddc1c;
+
+ * {
+  // font-family: 'IBM Plex Mono', monospace;
+  font-size: 12pt;
+ }
+
+ html {
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  letter-spacing: 0.5px;
+  font-size: 1.2em;
+}
+
+a {
+  color: $blue;
+  font-size: inherit;
+
+  &:hover {
+    color:#0000FF;
+  }
+}
+
+.card .card-body span {
+  font-size: 0.9em;
+  line-height: 0.9em;
+}
+
+// ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+//   text-transform: uppercase;
+//   font-size: 1em;
+// }
+
+.profile {
+  font-size: 9.5pt;
+}
+
+.home {
+  background: url('yellow_circle.svg') no-repeat left;
+  background-color: #FFFFFF;
+  background-size: 105%;
+}
+
+ .alerts {
+   position: absolute;
+   bottom: 50px;
+   right: 50px;
+   width: auto;
+   z-index: 2;
+ }
+
+ .yellow {
+  background-color: $yellow;
+ }
+
+
+ .bg-y {
+  // background: url('beans3.svg') no-repeat top;
+  background-color: $yellow;
+  background-size: cover;
+ }
+
+
+ .bg-prev {
+  background: url('prev-bg.svg') no-repeat top;
+  background-color: $yellow;
+  background-size: cover;
+ }
+
+ .label {
+   text-transform: uppercase;
+   font-size: 0.75em;
+   font-weight: bold;
+   letter-spacing: 0.5px;
+ }
+//  .font-white {
+//    color: #FFFFFF;
+//  }
+
+// .msg-border {
+//   border: 1px solid $yellow;
+//   background-color: $yellow;
+// }
+
+.donate-text {
+  font-size: 1em;
+}
+
+ .landing {
+   min-height: 100vh;
+ }
+ 
+h1, h2 {
+  font-family: 'hellovetica', futura-pt, sans-serif;
+  font-size: 1.6em;
+  line-height: 50px;
+}
+
+h4 {
+  font-family: 'hellovetica', futura-pt, sans-serif;
+  line-height: 50px;
+}
+
+ .navbar-brand {
+  width: 100px;
+ }
+
+ .navbar-light {
+  background-color: white;
+ }
+
+ .navbar-light .navbar-nav .nav-link {
+  color: $black;
+
+  &:hover {
+    color: $blue;
+  }
+}
+
+ a:hover {
+   text-decoration:none; 
+ }
+
+ .btn-default {
+  border-radius: 40px;
+}
+
+.btn-default-sm {
+  border-radius: 30px;
+}
+
+.notification {
+  background: #dddddd;
+  border-color: #dddddd;
+  color: #FFFFFF;
+  width: 30px;
+}
+
+ul {
+  list-style:none;
+}
+
+.circle {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  display: inline-block;
+  overflow: hidden;
+  background: #f3f6f9;
+  border-radius: 50%;
+
+  img {
+    width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+#myFooter .btn-outline-primary {
+  border-radius: 3px;
+  font-size: 0.8em;
+  padding: 2;
+}
+
+#myFooter .container .row .col-md-3 h5 {
+  font-size: 10pt;
+}
+
+#myFooter .container .row .col-md-3 ul li {
+  font-size: 10pt;
+}
+
+.custom-container .card .card-body .col-md-10 span {
+  font-weight: 6px;
+}
+ 
+.search {
+  width: 80px;
+  height: 80px;
+}
+
+.msg {
+  width: 40px;
+  height: 40px;
+}
+
+.nav {
+  width: 30px;
+  height: 30px;
+}
+
+
+
+.fixed-width-pic {
+  flex: 0 0 150px;
+}
+
+
+img.filter {
+  -webkit-filter: grayscale(100%) contrast(100%);
+  filter: grayscale(100%) contrast(100%);
+}
+
+.bottom-bord {
+  border-bottom: 1px solid #dddddd;
+}
+
+.btn-primary {
+  background: $blue;
+  border-color: $blue;
+
+  &:hover {
+    background: #0000FF;
+  }
+
+}
+
+.btn-outline-primary {
+  border: 1px solid $blue;
+  color: $blue;
+
+  &:hover {
+    background: $blue;
+    border: 1px solid $blue;
+  }
+}
+
+textarea {
+  resize: none;
+}
+
+.custom-card {
+  font-size: 11pt;
+}
+
+.small {
+  font-size: 9pt;
+}
+
+.card-columns {
+  @include media-breakpoint-only(xl) {
+    column-count: 3;
+  }
+  @include media-breakpoint-only(lg) {
+    column-count: 2;
+  }
+  @include media-breakpoint-only(md) {
+    column-count: 2;
+  }
+  @include media-breakpoint-only(sm) {
+    column-count: 1;
+  }
+}
+
+.custom-container {
+  margin: auto;
+  min-height: 500px;
+
+  @include media-breakpoint-only(xl) {
+    width: 60%;
+  }
+  @include media-breakpoint-only(lg) {
+    width: 75%;
+  }
+  @include media-breakpoint-only(md) {
+    width: 80%;
+  }
+  @include media-breakpoint-only(sm) {
+    width: 100%;
+  }
+}
+
+.form-sm {
+  margin: auto;
+
+  @include media-breakpoint-only(xl) {
+    width: 400px;
+  }
+  @include media-breakpoint-only(lg) {
+    width: 55%;
+  }
+  @include media-breakpoint-only(md) {
+    width: 75%;
+  }
+  @include media-breakpoint-only(sm) {
+    width: 100%;
+  }
+}
+
+.form-lg {
+  margin: auto;
+
+  @include media-breakpoint-only(xl) {
+    width: 700px;
+  }
+  @include media-breakpoint-only(lg) {
+    width: 700px;
+  }
+  @include media-breakpoint-only(md) {
+    width: 85%;
+  }
+  @include media-breakpoint-only(sm) {
+    width: 100%;
+  }
+}
+
+
+.footer {
+  width: 100%;
+  padding: 60px;
+  position: relative;
+  bottom: 0px;
+}
+
+.pagination {
+  justify-content: center;
+  padding-top: 30px;
+}
