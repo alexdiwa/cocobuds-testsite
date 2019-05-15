@@ -144,7 +144,9 @@ class UsersController < ApplicationController
 
     # Prevent user from performing unauthorized actions i.e. editing someone else's profile
     def authorize_user
-      redirect_to users_path if @user.id != current_user.id
+      if @user.id != current_user.id || current_user.id == 1
+        redirect_to users_path, notice: 'You are not authorised to perform this action.'
+      end
     end
 
     # Whitelisting parameters for forms
