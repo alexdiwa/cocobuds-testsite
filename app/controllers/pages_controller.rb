@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  def show 
+  def donate 
     @name = "#{current_user.first_name} #{current_user.last_name}"
     stripe_session = Stripe::Checkout::Session.create(
     customer_email: current_user.email,
@@ -21,6 +21,9 @@ class PagesController < ApplicationController
     )
     @stripe_session_id = stripe_session.id
     
-    render template: "pages/#{params[:page]}"
+    render template: "pages/donate"
+  end
+
+  def underconstruction
   end
 end
