@@ -1,7 +1,11 @@
 <div class="form-sm p-4 mb-4 mt-5 text-center landing">
 <%= render "devise/shared/error_messages", resource: resource %>
   <h4 class="display-5 mb-5">Welcome to Cocobuds</h4>
-
+      <div class="test-notice mb-3 p-4 text-left">
+        This is a test site. If you'd like to view this site as an active user, please use the following log in credentials:<br />
+        username: user@test.com <br />
+        password: usertest
+      </div>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
     <div class="form-group">

@@ -79,6 +79,15 @@ a {
    z-index: 2;
  }
 
+ .test-notice {
+  background: $yellow;
+  border-radius: 3px;
+ }
+
+ nav {
+   display: block;
+ }
+
  .yellow {
   background-color: $yellow;
  }
@@ -347,3 +356,4 @@ textarea {
   justify-content: center;
   padding-top: 30px;
 }
+
