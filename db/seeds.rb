@@ -68,8 +68,23 @@ locations.each do |location|
   puts "Created location: #{location}"
 end
 
+User.create(
+  email: "user@test.com",
+  password: "usertest",
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  role: rand(0..1),
+  age: rand(18..40),
+  bio: Faker::Hipster.paragraph(5),
+  portfolio_url: "http://#{Faker::Internet.domain_name}",
+  profile_complete: true,
+  stripe_payment: true,
+  location_id: rand(1..locations.length),
+  occupation: "Junior"
+)
+
 # Seeding users
-for i in 1..50
+for i in 1..49
   User.create(
     email: "ama+#{i}@test.com",
     password: "testpass",
