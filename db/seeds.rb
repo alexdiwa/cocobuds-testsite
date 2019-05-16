@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Making the HTTP request to UI faces
-response = HTTParty.get("https://uifaces.co/api?limit=55&from_age=18&to_age=40&emotion[]=happiness", {
+response = HTTParty.get("https://uifaces.co/api?limit=165&from_age=18&to_age=40&emotion[]=happiness", {
   headers: {
     "X-API-KEY" => "14198bec5b8c608a3d0c06b0b3915a"
   }
@@ -84,7 +84,7 @@ User.create(
 )
 
 # Seeding users
-for i in 1..49
+for i in 1..160
   User.create(
     email: "ama+#{i}@test.com",
     password: "testpass",

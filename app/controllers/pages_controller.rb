@@ -16,8 +16,8 @@ class PagesController < ApplicationController
           user_id: current_user.id
         }
       },
-        success_url: 'http://localhost:3000/payments/success',
-        cancel_url: 'http://localhost:3000/cancel',
+        success_url: 'https://cocobuds-testsite.herokuapp.com/payments/success',
+        cancel_url: 'https://cocobuds-testsite.herokuapp.com/cancel',
     )
     @stripe_session_id = stripe_session.id
     
