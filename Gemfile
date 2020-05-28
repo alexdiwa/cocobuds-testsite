@@ -77,6 +77,6 @@ gem "httparty", "~> 0.17.0"
 
 gem 'font-awesome-sass', '~> 5.8.1'
 
-gem "kaminari", "~> 1.1"
+gem "kaminari", "~> 1.2"
 
 gem 'rails-assets-bootstrap-filestyle', source: 'https://rails-assets.org'
